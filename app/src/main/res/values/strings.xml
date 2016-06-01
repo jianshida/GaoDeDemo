@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">高德测试</string>
+    <string name="preference_default_tts_role">xiaoyan</string>
+    <string name="preference_key_tts_speed">tts_speed</string>
+    <string name="preference_key_tts_volume">tts_volume</string>
+    <string name="preference_key_tts_pitch">tts_pitch</string>
+    <string name="app_id">输入您讯飞的appid</string>
+    <string name="navi_start">"起    点"</string>
+    <string name="navi_end">"终    点"</string>
+    <string name="navi_empty_car">"驾   车"</string>
+    <string name="navi_empty_foot">"步   行"</string>
+    <string name="navibar_title">路径规划</string>
+
+</resources>
