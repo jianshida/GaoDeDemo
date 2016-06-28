@@ -47,10 +47,17 @@
 ```
 ### 实际代码调用
 * 定位服务
+	- 只需引入AMap_LocationV2.xxxx.jar
 	- 引入LocationUtil类(从demo中copy)
+	- 如若需求上有需间隔定位，在LocationUtil初始化时可设置间隔时间(毫秒)
 	- 调用LocationUtil中的startLocation()
 	- 在调用activity中定义一个handler继承LocationUtil中的LocationHanlder并重写handler回调方法，经纬度等所需值就在对象AMapLocation中
-	- 在获取结束后记得调用stopLocation()来结束定位
+	- 在获取结束后记得调用stopLocation()来结束定位(如无需间隔定位).
+
+* 地图上手势获取位置或输入框编辑查找位置
+	- 需要引入AMap_3DMap_V3.xxx.jar和AMap_Search_V3.xxx.jar
+	- 引入ChoosePositionActivity(从demo中copy)
+	- 加入相应的文件即可
 
 * 导航服务
 	- 引入RoutePlanningActivity类(从demo中copy)

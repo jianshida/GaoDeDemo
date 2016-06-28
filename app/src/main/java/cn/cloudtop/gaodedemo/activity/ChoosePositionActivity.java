@@ -81,7 +81,6 @@ public class ChoosePositionActivity extends Activity implements OnCameraChangeLi
     private String LocationCtiy;
     private String cityArea;
     private int index = -1;
-    public static int INPUT_POSITION = 2;
     //手动输入搜素
     private int currentPage = 0;// 当前页面，从0开始计数
     private PoiResult poiResult; // poi返回的结果
@@ -99,7 +98,6 @@ public class ChoosePositionActivity extends Activity implements OnCameraChangeLi
                     LatLng locationLatLng = new LatLng(positionModel.getLatLonPoint().getLatitude(), positionModel.getLatLonPoint().getLongitude());
                     addMarker(locationLatLng);
                 }
-//                getClearStockList(positionModel.getLatLonPoint().getLongitude(), positionModel.getLatLonPoint().getLatitude(), load);
             }
         }
 
@@ -159,7 +157,7 @@ public class ChoosePositionActivity extends Activity implements OnCameraChangeLi
             case R.id.back:
                 finish();
                 break;
-            case R.id.title_right_btn:
+            case R.id.title_right_btn://点击确定后的返回值
                 if (adapter.resultData() == null) {
                     Toast.makeText(this, "请选择地址", Toast.LENGTH_SHORT).show();
                 } else {
@@ -312,8 +310,6 @@ public class ChoosePositionActivity extends Activity implements OnCameraChangeLi
     }
 
     private void startSearch(final LatLonPoint latLonPoint) {
-        //111111111111111
-//        getClearStockList(latLonPoint.getLongitude(), latLonPoint.getLatitude(), load);
         geocoderSearch = new GeocodeSearch(this);
         // 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
         RegeocodeQuery regecodeQuery = new RegeocodeQuery(latLonPoint, 10000, GeocodeSearch.AMAP);
@@ -467,60 +463,4 @@ public class ChoosePositionActivity extends Activity implements OnCameraChangeLi
 
     }
 
-//    /**
-//     * 选择洗车时间
-//     */
-//    private void getClearStockList(double longtitue, double latitue, final TextView load
-//    ) {
-//        final LatLng latLng = new LatLng(latitue, longtitue);
-//        load.setVisibility(View.VISIBLE);
-//        load.setText("加载中...");
-//        tvNext.setEnabled(false);
-//        load.setBackgroundColor(getResources().getColor(color.black_ranslucent));
-//        load.setTextColor(getResources().getColor(color.white));
-//        RequestParams params = new RequestParams();
-//        params.addQueryStringParameter("method", "getClearStockList");
-//        params.addQueryStringParameter("clazz", "dcsCommon");
-//        params.addQueryStringParameter("lng", longtitue + "");
-//        params.addQueryStringParameter("lat", latitue + "");
-//        params.addQueryStringParameter("memberPhone", "");
-//        params.addQueryStringParameter("clearpro", "");
-//        HttpUtils http = new HttpUtils();
-//        http.send(HttpRequest.HttpMethod.POST, Constants.URL, params, new RequestCallBack<String>() {
-//            @Override
-//            public void onSuccess(ResponseInfo<String> responseInfo) {
-//                Log.i("判断地区是否开放URL", this.getRequestUrl());
-//                Gson gson = new Gson();
-//                try {
-//
-//
-//                    ChooseTimeGson entity = gson.fromJson(responseInfo.result, ChooseTimeGson.class);
-//                    if (!entity.getFlag()) {
-//                        load.setText(entity.getMsg());
-//                        load.setTextColor(getResources().getColor(color.white));
-//                        load.setBackgroundColor(getResources().getColor(color.red_ranslucent));
-//                        tvNext.setEnabled(false);
-//                        aMap.clear();
-//                        addMarkerNoUse(latLng);
-//                    } else {
-//                        tvNext.setEnabled(true);
-//                        load.setVisibility(View.GONE);
-//                        aMap.clear();
-//                        addMarker(latLng);
-//                    }
-//
-//                } catch (Exception e) {
-//                    // TODO: handle exception
-//                    ToastUtil.showToast(ChoosePositionActivity.this, "访问异常");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(HttpException error, String msg) {
-//
-//                ToastUtil.showToast(ChoosePositionActivity.this, R.string.network_exception);
-//            }
-//        });
-//
-//    }
 }
