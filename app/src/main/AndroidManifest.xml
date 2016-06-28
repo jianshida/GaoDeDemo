@@ -33,8 +33,14 @@
             android:value="4cc3de27ab1752d07eb9cdbbcb2ef713" />
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService" />
+        <!--路线规划-->
         <activity android:name=".activity.RoutePlanningActivity"/>
+        <!--导航页面-->
         <activity android:name=".activity.SimpleNaviActivity"/>
+        <!--选择位置-->
+        <activity android:name=".activity.ChoosePositionActivity"/>
+        <!--查找位置-->
+        <activity android:name=".activity.InputPositionActivity"/>
     </application>
 
 </manifest>

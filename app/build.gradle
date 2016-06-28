@@ -23,8 +23,9 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.map:location:2.4.1'
+//    compile 'com.map:location:2.4.1'
     compile files('libs/AMap3DMap_3.3.1_AMapNavi_1.8.0_20160420.jar')
     compile files('libs/Msc.jar')
     compile files('libs/Volley.jar')
+    compile files('libs/AMap_Search_V3.3.0_20160616.jar')
 }

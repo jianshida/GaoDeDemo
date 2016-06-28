@@ -19,8 +19,8 @@ import cn.cloudtop.gaodedemo.util.locationConstants;
 public class MainActivity extends Activity implements View.OnClickListener{
 
     private Button startLocation;
-    private Button startNavi;
-    private TextView locationText;
+    private Button startNavi, choosePosition;
+    private TextView locationText, positionText;
     private LocationUtil locationUtil;
 
     @Override
@@ -29,28 +29,47 @@ public class MainActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_main);
         startLocation = (Button) findViewById(R.id.location_btn);
         startNavi = (Button) findViewById(R.id.start_navi);
+        choosePosition = (Button) findViewById(R.id.choose_position);
         locationText = (TextView) findViewById(R.id.location_text);
+        positionText = (TextView) findViewById(R.id.position_text);
         startLocation.setOnClickListener(this);
         startNavi.setOnClickListener(this);
-        locationUtil = new LocationUtil(this, new handler());
+        choosePosition.setOnClickListener(this);
+        locationUtil = new LocationUtil(this, new handler(), 5000);
     }
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             case R.id.location_btn:
                 locationUtil.startLocation();
                 break;
             case R.id.start_navi:
-                Intent intent = new Intent(this, RoutePlanningActivity.class);
+                intent = new Intent(this, RoutePlanningActivity.class);
                 intent.putExtra("isDriver", true);
                 intent.putExtra("isEmulatorNavi", false);
                 intent.putExtra("naviStartLng", new NaviLatLng(39.989614, 116.481763));
                 intent.putExtra("naviEndLng", new NaviLatLng(39.983456, 116.3154950));
                 startActivity(intent);
                 break;
+            case R.id.choose_position:
+                intent = new Intent(this, ChoosePositionActivity.class);
+                startActivityForResult(intent, 100);
+                break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            if (resultCode == 100) {
+                String address = data.getStringExtra("address");
+                positionText.setText(address);
+            }
         }
     }
 

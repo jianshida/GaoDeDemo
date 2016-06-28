@@ -3,11 +3,13 @@ package cn.cloudtop.gaodedemo.util;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps.LocationSource;
 
 /**
  * Created by james on 2016/5/13.
@@ -24,6 +26,23 @@ public class LocationUtil implements AMapLocationListener {
         locationOption = new AMapLocationClientOption();
         // 设置定位模式为低功耗模式
         locationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Battery_Saving);
+        // 设置定位监听
+        locationClient.setLocationListener(this);
+    }
+
+    /**
+     * 构造函数 初始化参数
+     * @param context 上下文对象
+     * @param handler 回调
+     * @param interval 定位间隔(毫秒)
+     */
+    public LocationUtil(Context context, Handler handler, long interval) {
+        this.handler = handler;
+        locationClient = new AMapLocationClient(context);
+        locationOption = new AMapLocationClientOption();
+        // Hight_Accuracy设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
+        locationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Battery_Saving);
+        locationOption.setInterval(interval);//设置定位间隔,单位毫秒,默认为2000ms
         // 设置定位监听
         locationClient.setLocationListener(this);
     }
@@ -65,9 +84,10 @@ public class LocationUtil implements AMapLocationListener {
                     AMapLocation loc = (AMapLocation)msg.obj;
                     String result = locationConstants.getLocationStr(loc);
                     handler(loc);
-                    onDestory();
+//                    onDestory();
                     break;
                 case locationConstants.MSG_LOCATION_STOP://定位停止
+                    onDestory();
                     break;
                 default:
                     break;
