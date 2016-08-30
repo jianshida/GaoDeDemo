@@ -16,7 +16,7 @@ import cn.cloudtop.gaodedemo.activity.SimpleNaviActivity;
 import cn.cloudtop.gaodedemo.util.LocationUtil;
 import cn.cloudtop.gaodedemo.util.locationConstants;
 
-public class MainActivity extends Activity implements View.OnClickListener{
+public class MainActivity extends Activity implements View.OnClickListener {
 
     private Button startLocation;
     private Button startNavi, choosePosition;
@@ -35,7 +35,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         startLocation.setOnClickListener(this);
         startNavi.setOnClickListener(this);
         choosePosition.setOnClickListener(this);
-        locationUtil = new LocationUtil(this, new handler(), 5000);
+        locationUtil = new LocationUtil(this, new handler());
     }
 
     @Override
@@ -78,8 +78,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
         @Override
         public void handler(AMapLocation location) {
             String result = locationConstants.getLocationStr(location);
-            Log.e("经度", location.getLatitude()+"");
-            Log.e("纬度", location.getLongitude()+"");
+            Log.e("经度", location.getLatitude() + "");
+            Log.e("纬度", location.getLongitude() + "");
             Log.e("result", result);
             locationText.setText(location.getAddress());
             locationUtil.stopLocation();
